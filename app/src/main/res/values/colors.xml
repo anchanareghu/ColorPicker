@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- basic  colors -->
+
+    <color name="yellow">#FFFF00</color>
+    <color name="blue">#0000FF</color>
+    <color name="green">#00FF00</color>
+    <color name="red">#FF0000</color>
+    <color name="magenta">#FF00FF</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+     pastel  colors
+        <color name="pink">#FFB3BA</color>
+        <color name="lilac">#E0AED0</color>
+        <color name="peach">#FFDFBA</color>
+        <color name="lemon">#FFFFBA</color>
+        <color name="pistachio">#BAFFC9</color>
+
+    <string-array name="colors">
+        <item>#FF0000</item>
+        <item>#00FF00</item>
+        <item>#0000FF</item>
+        <item>#FFFF00</item>
+        <item>#FF00FF</item>
+        <item>#FF000000</item>
+        <item>#FFFFFFFF</item>
+
+        <item>#FFB3BA</item>
+        <item>#E0AED0</item>
+        <item>#FFDFBA</item>
+        <item>#FFFFBA</item>
+        <item>#BAFFC9</item>
+    </string-array>
+
+
+</resources>
