@@ -1,6 +1,7 @@
 package com.example.colorpicker;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity {
@@ -58,12 +60,16 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 String selectedColor = colorsArray[checkedId];
 
-                LiveData<String> liveData = viewModel.getSelectedColor();
-                viewModel.setSelectedColor(liveData.getValue());
+                viewModel.setSelectedColor(selectedColor);
+            }
+        });
 
-                cardViewText.setText(selectedColor);
-                cardViewText.setTextColor(Color.parseColor(selectedColor));
-                cardViewColor.setCardBackgroundColor(Color.parseColor(selectedColor));
+        viewModel.getSelectedColor().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String color) {
+                cardViewText.setText(color);
+                cardViewText.setTextColor(Color.parseColor(color));
+                cardViewColor.setCardBackgroundColor(Color.parseColor(color));
             }
         });
     }
