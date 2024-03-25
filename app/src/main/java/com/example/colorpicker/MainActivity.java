@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
                 LiveData<String> liveData = viewModel.getSelectedColor();
                 viewModel.setSelectedColor(liveData.getValue());
-//                viewModel.setSelectedColor(selectedColor);
 
                 cardViewText.setText(selectedColor);
                 cardViewText.setTextColor(Color.parseColor(selectedColor));
