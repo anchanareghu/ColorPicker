@@ -9,5 +9,6 @@ This Android application allows users to pick colors from a dynamic color palett
 - Integration with ViewModel for managing color state
 
 ## Screenshots
+ <img src="app/src/main/res/drawable/screenshot_01.png" width="200" /> 
 
-<img src="app/src/main/res/drawable/screenshot01.png" width="200" /> <img src="app/src/main/res/drawable/screenshot02.png" width="200" /> 
+<img src="app/src/main/res/drawable/screenshot_02.png" width="200" />
