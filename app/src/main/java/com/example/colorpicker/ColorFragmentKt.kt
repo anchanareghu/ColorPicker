@@ -25,12 +25,11 @@ class ColorFragmentKt : Fragment() {
         cardViewColor = view.findViewById(R.id.cardView_color)
 
         viewModel = ViewModelProvider(requireActivity()).get(ColorPickerViewModelKt::class.java)
-        viewModel.getSelectedColor().observe(viewLifecycleOwner
-        ) { value ->
+        viewModel.getSelectedColor().observe(viewLifecycleOwner, Observer { value ->
             cardViewText.text = value
             cardViewText.setTextColor(Color.parseColor(value))
             cardViewColor.setCardBackgroundColor(Color.parseColor(value))
-        }
+        })
         return view
     }
 }
