@@ -61,27 +61,6 @@ fun ColorPickerApp(viewModel: ColorPickerViewModel) {
 ```
 - Observes the `selectedColor` from the `ViewModel` and updates the UI accordingly.
 
-## Testing
-To test the ViewModel and its interactions, we use JUnit and Mockito.
+## Preview
 
-### Example Unit Test
-```kotlin
-@RunWith(MockitoJUnitRunner::class)
-class ColorPickerViewModelTest {
-    private lateinit var viewModel: ColorPickerViewModel
-
-    @Before
-    fun setUp() {
-        viewModel = ColorPickerViewModel()
-    }
-
-    @Test
-    fun testSetSelectedColor() {
-        val color = "#FF0000"
-        viewModel.setSelectedColor(color)
-        assertEquals(color, viewModel.selectedColor.getOrAwaitValue())
-    }
-}
-```
-## Screenshots
  <img src="app/src/main/res/drawable/screenshot_01.png" width="200" /> <img src="app/src/main/res/drawable/screenshot_02.png" width="200" />
