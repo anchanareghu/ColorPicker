@@ -1,50 +1,87 @@
 # ColorPicker App
 
+The ColorPicker app allows users to pick and display colors from a predefined set. This application demonstrates the use of Jetpack Compose for UI development along with Android's `ViewModel` for managing UI-related data.
+
 ## Overview
+The ColorPicker app provides a simple interface where users can select colors from a grid and view the selected color in a card. The app uses Jetpack Compose for the UI and Android's `ViewModel` to manage the color selection state across configuration changes like screen rotations.
 
-ColorPicker is a simple Android application that allows users to pick colors and view their hexadecimal values. This project highlights the usage of ViewModel architecture component in an Android app.
+## Features
+- Select colors from a predefined grid.
+- Display the selected color in a card.
+- Persist the selected color state across configuration changes using `ViewModel`.
 
-## Description
+## Architecture
+The app follows the MVVM (Model-View-ViewModel) architecture pattern:
+- **Model**: Contains the data for the app (e.g., color values).
+- **View**: The UI layer built with Jetpack Compose.
+- **ViewModel**: Manages the UI-related data and survives configuration changes.
 
-ColorPicker app allows users to select colors from a predefined list and view their corresponding hexadecimal values. It showcases the implementation of ViewModel to manage UI-related data and handle configuration changes efficiently.
+## Usage
+The `ViewModel` in this app (`ColorPickerViewModel`) manages the state of the selected color. Here's a breakdown of how it works:
 
-## ViewModel Usage
+### ColorPickerViewModel
+```kotlin
+class ColorPickerViewModel : ViewModel() {
+    private val _selectedColor = MutableLiveData<String>("#FFFFFF")
+    val selectedColor: LiveData<String> get() = _selectedColor
 
-The ViewModel in this project is utilized to efficiently manage UI-related data and handle configuration changes. Here's how ViewModel is integrated into the project:
+    fun setSelectedColor(color: String) {
+        _selectedColor.value = color
+    }
+}
+```
+- **_selectedColor**: A private `MutableLiveData` that holds the currently selected color.
+- **selectedColor**: A public `LiveData` to expose the selected color to the UI.
+- **setSelectedColor**: A function to update the selected color.
 
-1. **ColorViewModel Class**: The `ColorViewModel` class extends `ViewModel` and holds the selected color data.
+### MainActivity
+```kotlin
+class MainActivity : ComponentActivity() {
+    private val viewModel by viewModels<ColorPickerViewModel>()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            ColorPickerTheme {
+                ColorPickerApp(viewModel)
+            }
+        }
+    }
+}
+```
+- **viewModel**: An instance of `ColorPickerViewModel` scoped to the `MainActivity`.
+- **setContent**: Sets the content view using Jetpack Compose.
 
-   ```kotlin
-   class ColorViewModel : ViewModel() {
-       private val selectedColor = MutableLiveData<String>()
+### ColorPickerApp
+```kotlin
+@Composable
+fun ColorPickerApp(viewModel: ColorPickerViewModel) {
+    val selectedColor by viewModel.selectedColor.observeAsState()
+    // UI code that uses selectedColor
+}
+```
+- Observes the `selectedColor` from the `ViewModel` and updates the UI accordingly.
 
-       fun setSelectedColor(color: String) {
-           selectedColor.value = color
-       }
+## Testing
+To test the ViewModel and its interactions, we use JUnit and Mockito.
 
-       fun getSelectedColor(): LiveData<String> {
-           return selectedColor
-       }
-   }
-   ```
+### Example Unit Test
+```kotlin
+@RunWith(MockitoJUnitRunner::class)
+class ColorPickerViewModelTest {
+    private lateinit var viewModel: ColorPickerViewModel
 
-2. **ViewModelProvider**: ViewModelProvider is used to retrieve an instance of the ViewModel in the fragment.
+    @Before
+    fun setUp() {
+        viewModel = ColorPickerViewModel()
+    }
 
-   ```kotlin
-   viewModel = ViewModelProvider(requireActivity()).get(ColorViewModel::class.java)
-   ```
-
-3. **Observing LiveData**: LiveData objects within the ViewModel are observed to update the UI based on changes in the selected color.
-
-   ```kotlin
-   viewModel.getSelectedColor().observe(viewLifecycleOwner, { color ->
-       // Update UI with the selected color
-   })
-   ```
-
-4. **ViewModel Lifecycle**: ViewModel lifecycle is managed by the associated fragment. It is automatically cleared when the fragment is destroyed, preventing memory leaks.
-
+    @Test
+    fun testSetSelectedColor() {
+        val color = "#FF0000"
+        viewModel.setSelectedColor(color)
+        assertEquals(color, viewModel.selectedColor.getOrAwaitValue())
+    }
+}
+```
 ## Screenshots
- <img src="app/src/main/res/drawable/screenshot_01.png" width="200" /> 
-
-<img src="app/src/main/res/drawable/screenshot_02.png" width="200" />
+ <img src="app/src/main/res/drawable/screenshot_01.png" width="200" /> <img src="app/src/main/res/drawable/screenshot_02.png" width="200" />
