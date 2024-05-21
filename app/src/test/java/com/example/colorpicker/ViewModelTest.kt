@@ -14,20 +14,10 @@ import org.junit.rules.TestRule
 
 class ColorPickerViewModelTest {
 
-    private lateinit var viewModel: ColorPickerViewModel
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private val testDispatcher = UnconfinedTestDispatcher()
+    private var viewModel: ColorPickerViewModel =ColorPickerViewModel()
 
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Before
-    fun setUp() {
-        Dispatchers.setMain(testDispatcher)
-        viewModel = ColorPickerViewModel()
-    }
 
     @Test
     fun testInitialColor() {
