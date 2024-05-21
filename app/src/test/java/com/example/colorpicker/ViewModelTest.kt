@@ -1,7 +1,6 @@
 package com.example.colorpicker
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.Observer
 import junit.framework.TestCase.assertEquals
 import org.junit.Rule
