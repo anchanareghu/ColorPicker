@@ -6,13 +6,19 @@ import junit.framework.TestCase.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
+import org.junit.Before
 
 class ColorPickerViewModelTest {
 
-    private var viewModel: ColorPickerViewModel = ColorPickerViewModel()
+    private lateinit var viewModel: ColorPickerViewModel
 
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()
+
+    @Before
+    fun setUp() {
+        viewModel = ColorPickerViewModel()
+    }
 
     @Test
     fun testInitialColor() {
