@@ -11,12 +11,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-     pastel  colors
-        <color name="pink">#FFB3BA</color>
-        <color name="lilac">#E0AED0</color>
-        <color name="peach">#FFDFBA</color>
-        <color name="lemon">#FFFFBA</color>
-        <color name="pistachio">#BAFFC9</color>
+    <!-- pastel  colors-->
+    <color name="pink">#FFB3BA</color>
+    <color name="lilac">#E0AED0</color>
+    <color name="peach">#FFDFBA</color>
+    <color name="lemon">#FFFFBA</color>
+    <color name="pistachio">#BAFFC9</color>
 
     <string-array name="colors">
         <item>#FF0000</item>
