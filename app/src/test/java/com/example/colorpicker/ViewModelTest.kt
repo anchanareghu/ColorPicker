@@ -1,6 +1,7 @@
 package com.example.colorpicker
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.Observer
 import junit.framework.TestCase.assertEquals
 import org.junit.Rule
@@ -30,8 +31,8 @@ class ColorPickerViewModelTest {
         val observer = Observer<String> {}
         try {
             viewModel.selectedColor.observeForever(observer)
-            viewModel.setSelectedColor("#FFFFFF")
-            assertEquals("#FFFFFF", viewModel.selectedColor.value)
+            viewModel.setSelectedColor("#00FF00")
+            assertEquals("#00FF00", viewModel.selectedColor.value)
         } finally {
             viewModel.selectedColor.removeObserver(observer)
         }
