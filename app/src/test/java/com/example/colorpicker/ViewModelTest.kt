@@ -9,7 +9,7 @@ import org.junit.rules.TestRule
 
 class ColorPickerViewModelTest {
 
-    private var viewModel: ColorPickerViewModel =ColorPickerViewModel()
+    private var viewModel: ColorPickerViewModel = ColorPickerViewModel()
 
     @get:Rule
     val rule: TestRule = InstantTaskExecutorRule()
