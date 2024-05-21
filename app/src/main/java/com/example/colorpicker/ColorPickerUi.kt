@@ -3,6 +3,7 @@ package com.example.colorpicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,7 +24,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 @Composable
 fun ColorPickerApp(viewModel: ColorPickerViewModel) {
     val colors = listOf(
@@ -32,15 +32,19 @@ fun ColorPickerApp(viewModel: ColorPickerViewModel) {
     )
     val selectedColor by viewModel.selectedColor.observeAsState()
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(parseColor(selectedColor ?: "#FFFFFF"))
     ) {
-        ColorDetails(
-            selectedColor ?: "#FFFFFF",
-            modifier = Modifier.align(Alignment.Center)
-        )
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            ColorDetails(selectedColor ?: "#FFFFFF")
+        }
 
         ColorPicker(colors) { color ->
             viewModel.setSelectedColor(color)
@@ -53,10 +57,12 @@ fun ColorPicker(colors: List<String>, onColorSelected: (String) -> Unit) {
     Box(
         Modifier
             .background(Color.DarkGray)
-            .padding(16.dp)
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(4),
+            modifier = Modifier
+                .padding(16.dp)
+                .align(Alignment.Center),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             items(colors) { color ->
@@ -74,9 +80,9 @@ fun ColorPicker(colors: List<String>, onColorSelected: (String) -> Unit) {
 }
 
 @Composable
-fun ColorDetails(color: String, modifier: Modifier = Modifier) {
+fun ColorDetails(color: String) {
     OutlinedCard(
-        modifier = modifier
+        modifier = Modifier
             .size(200.dp)
             .padding(16.dp),
         colors = CardDefaults.cardColors(parseColor(color)),
